@@ -9,10 +9,8 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v4
 
-        - name: Welcome message
-          run: echo "Welcome my owner"
+        - name: Install cowsay
+          run: sudo apt-get install cowsay -y
 
-        - name: list file
-          run: ls
-        - name: read updated text file
-          run: cat test.txt
+        - name: execute cowsay
+          run: cowsay "$(cat test.txt)"
