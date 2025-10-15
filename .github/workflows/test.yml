@@ -14,3 +14,16 @@ jobs:
 
         - name: execute cowsay
           run: cowsay "$(cat test.txt)"
+    second_job:
+        needs: first_job
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Install cowsay
+          run: sudo apt-get install cowsay -y
+
+        - name: execute cowsay
+          run: cowsay "$(cat test2.txt)"
+        
