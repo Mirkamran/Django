@@ -3,27 +3,38 @@ name: kamran test
 on: push
 
 jobs:
-    first_job:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
+  first_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        - name: Install cowsay
-          run: sudo apt-get install cowsay -y
+      - name: Install cowsay
+        run: sudo apt-get install cowsay -y
 
-        - name: execute cowsay
-          run: cowsay "$(cat test.txt)"
-    second_job:
-        needs: first_job
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
+      - name: Execute cowsay
+        run: cowsay "$(cat test.txt)"
 
-        - name: Install cowsay
-          run: sudo apt-get install cowsay -y
+      - name: Edit txt
+        run: echo "edited file in the action" > test.txt
 
-        - name: execute cowsay
-          run: cowsay "$(cat test2.txt)"
-        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: test.txt
+
+  second_job:
+    needs: first_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install cowsay
+        run: sudo apt-get install cowsay -y
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifact
+
+      - name: Execute cowsay
+        run: cowsay "$(cat test.txt)"
