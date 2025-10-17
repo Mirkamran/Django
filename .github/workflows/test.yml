@@ -37,4 +37,4 @@ jobs:
           name: my-artifact
 
       - name: Execute cowsay
-        run: cowsay "$(cat test.tx≠t)"
+        run: cowsay "$(cat test.txt)"
