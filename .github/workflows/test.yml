@@ -32,6 +32,7 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest 
 
   pull-and-deploy:
+    needs:  build-and-push
     runs-on: ubuntu-latest
 
     steps:
