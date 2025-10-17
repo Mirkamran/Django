@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Kamran's server 🚀</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff8, 0 0 30px #f8f; }
+      to   { text-shadow: 0 0 20px #fff, 0 0 40px #ff8, 0 0 60px #f8f; }
+    }
+
+    p {
+      font-size: 1.3em;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    .time {
+      font-size: 1.1em;
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+
+    button {
+      margin-top: 40px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Kamran's server 🚀</h1>
+  <p>Your custom container is up and running.</p>
+  <div class="time" id="time"></div>
+  <button onclick="alert('Hello from your NGINX container!')">Say Hi 👋</button>
+  <footer>Powered by NGINX • Built with ❤️ using GitHub Actions</footer>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('time').textContent =
+        'Current time: ' + now.toLocaleString();
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
