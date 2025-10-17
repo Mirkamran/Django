@@ -31,17 +31,17 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest 
 
-    pull-and-deploy:
-      runs-on: ubuntu-latest
+  pull-and-deploy:
+    runs-on: ubuntu-latest
 
-      steps:
-        # step to pull the docker image
-        - name: pull image
-          run: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest
-            docker run -d -p 80:80 --name custom-nginx mirkamran/custom-nginx:latest
-            curl http://127.0.0.1:80
-          
+    steps:
+      # step to pull the docker image
+      - name: pull image
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest
+          docker run -d -p 80:80 --name custom-nginx ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest
+          curl http://127.0.0.1:80
+        
           
 
 
