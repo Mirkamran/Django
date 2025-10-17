@@ -1,40 +1,32 @@
-name: kamran test
+name: Build and Push NGINX Custom Image
 
-on: push
+on:
+  push:
+    branches:
+      - main  # or whichever branch you use
 
 jobs:
-  first_job:
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install cowsay
-        run: sudo apt-get install cowsay -y
-
-      - name: Execute cowsay
-        run: cowsay "$(cat test.txt)"
-
-      - name: Edit txt
-        run: echo "edited file in the action" > test.txt
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          name: my-artifact
-          path: test.txt
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-  second_job:
-    needs: first_job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install cowsay
-        run: sudo apt-get install cowsay -y
+      # Step 3: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest .
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: my-artifact
-
-      - name: Execute cowsay
-        run: cowsay "$(cat test.txt)"
+      # Step 4: Push Docker image
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest
