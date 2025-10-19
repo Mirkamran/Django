@@ -35,7 +35,9 @@ jobs:
   pull-and-deploy:
     needs:  build-and-push
 
-    concure
+    concurrency:
+      group: deploy-group
+      cancel-in-progress: false
     runs-on: ubuntu-latest
 
     steps:
