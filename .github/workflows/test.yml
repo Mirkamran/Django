@@ -34,6 +34,7 @@ jobs:
 
   pull-and-deploy:
     needs:  build-and-push
+    if: github.ref == 'refs/heads/main'
 
     concurrency:
       group: deploy-group
