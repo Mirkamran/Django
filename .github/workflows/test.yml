@@ -43,8 +43,6 @@ jobs:
           docker run -d -p 80:80 --name custom-nginx ${{ secrets.DOCKERHUB_USERNAME }}/custom-nginx:latest
           sleep 30
           curl http://127.0.0.1:80
-        
-          
 
 
           
