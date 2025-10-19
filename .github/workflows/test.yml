@@ -3,7 +3,7 @@ name: Build and Push NGINX Custom Image
 on:
   push:
     branches:
-      - main  # or whichever branch you use
+      - '**'  # or whichever branch you use
   workflow_dispatch:
 
 jobs:
@@ -34,6 +34,7 @@ jobs:
 
   pull-and-deploy:
     needs:  build-and-push
+    if: github.ref == 'refs/heads/main'
 
     concurrency:
       group: deploy-group
